@@ -16,7 +16,7 @@ pub struct MessageEntry {
     timestamp: u64,
 }
 pub struct MessagingService {
-   pub messages_wall: Arc<RwLock<Vec<MessageEntry>>>,
+   pub messages_wall: RwLock<Vec<MessageEntry>>
 }
 
 impl Messaging for MessagingService {

@@ -25,7 +25,7 @@ fn main() {
     println!("Hello, world!");
 
     let messaging_service = messaging_service::MessagingService {
-        messages_wall: std::sync::Arc::new(std::sync::RwLock::new(Vec::new())),
+        messages_wall: std::sync::RwLock::new(Vec::new()),
     };
 
     let concurrent_messaging_service = Arc::new(messaging_service);
@@ -47,7 +47,9 @@ fn main() {
                         Ok(response)
                     };
                     let mut websocket = accept_hdr(_stream, callback).unwrap();
-                    loop {
+                    loop { // must be improved, avoid using loop and use a more efficient way to handle messages
+                        // be inspired by tokio-rs/axum/chat
+
                         let msg = websocket.read().unwrap();
                         let user_id_guard = user_id.read().unwrap();
                         svc.publish_message(&msg.to_string(), &user_id_guard)
