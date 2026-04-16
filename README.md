@@ -1,5 +1,5 @@
 # ws-chatting
-'´´´java
+´´´java
 <dependencies>
   <!-- Vert.x -->
   <dependency>
